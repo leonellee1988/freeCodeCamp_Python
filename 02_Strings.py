@@ -81,3 +81,11 @@ lower_chars = 'abc'
 upper_chars = 'ABC'
 table = str.maketrans(lower_chars, upper_chars)
 print(table)
+
+# Built-in 'split()' method
+
+phrase = 'Hello Word, we area learning Python'
+words = phrase.split(" ")
+print(words)
+
+# Note: very important to notice that the method create a list (not need to add 'list()')
