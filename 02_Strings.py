@@ -89,3 +89,18 @@ words = phrase.split(" ")
 print(words)
 
 # Note: very important to notice that the method create a list (not need to add 'list()')
+
+# A regular expression, or regex, is a pattern used to match a sequence of characters in text
+
+import re
+
+greeting = 'Hello there!'
+print(re.search('Hello', greeting))
+print(re.search('Hi', greeting))
+print(re.search('H', greeting))
+print(re.search('h', greeting, re.IGNORECASE))
+
+book = 'Fahrenheit 451'
+print(re.search('\\d', book))
+print(re.search('\\d+', book))
+print(re.fullmatch('Fahrenheit \\d+', book))

@@ -87,6 +87,9 @@ print(erased_num)
 my_list_5.clear()
 print(my_list_5)
 
+falsy_list = [0,1,2,3,4,5]
+print(all(falsy_list))
+
 # sort()
 
 numbers_2 = [12, 39, 1, -20, 100, 57]
@@ -106,3 +109,11 @@ print(sorted_numbers)
 # index()
 
 print(programming_languages.index('C++'))
+
+# The built-in 'all()'
+
+truthy_list = [1,2,3,4,5]
+print(all(truthy_list))
+
+falsy_list = [0,1,2,3,4,5]
+print(all(falsy_list))
