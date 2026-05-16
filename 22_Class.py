@@ -133,59 +133,124 @@ print("Monitor" in cart)#__contains__
 
 # getattr() - getattr(object, attribute_name, default_value)
 
-class Student:
-    def __init__(self, id, name, age):
-        self.id = id
+class Person:
+    def __init__(self, name, age):
         self.name = name
         self.age = age
-    
-student1 = Student('std-0001', 'Bebay Hernández', 35)
 
-#stu_attr = input('Enter the attribute you want to see: ')
-#print(getattr(student1, stu_attr, "Attribute not found"))
+person = Person('Bebay Hernández', 35)
+print(getattr(person, 'name'))
 
-#If we want to see all the attributes for our object:
+# attr_name = input('Enter the attribute you want to see: ')
+# print(getattr(person, attr_name, 'Attribute not found'))
 
-for attr in dir(student1):
-    if not attr.startswith('__') and not callable(getattr(student1, attr)):
-        value = getattr(student1, attr)
-        print(f"{attr}: {value}")
+for attr in dir(person):
+    if not attr.startswith('__') and not callable(getattr(person, attr)):
+        value = getattr(person, attr)
+        print(f'{attr}: {value}')
+
+class Student:
+    def __init__(self, id, name, lastname, faculty):
+        self.id = id
+        self.name = name
+        self.lastname = lastname
+        self.faculty = faculty
+
+student = Student(1, 'Edwin', 'Lee', 'Math')
+
+for attr in dir(student):
+    value = getattr(student, attr)
+    print(f"{attr}: {value}")
 
 # setattr() - setattr(object, attribute_name, value)
 
 class Configuration:
     pass
 
-# Data loaded at runtime (like from a config or env file)
+# Data loaded at runtime
+
 settings_data = {
     'server_url': 'https://api.example.com',
-    'timeout_sec': 30,
+    'time_sec': 30,
     'max_retries': 5
 }
 
 config_object = Configuration()
 
+#Dynamically set attributes using dictionary keys and values
+
 for attr_name, attr_value in settings_data.items():
-    #print(attr_name, attr_value)
     setattr(config_object, attr_name, attr_value)
 
 print(config_object.server_url)
-print(config_object.timeout_sec)
-print(config_object.max_retries)
+print(config_object.time_sec)
+print(config_object.max_retries) 
 
-# hasattr - hasattr(object, atribute_name)
-
-class Product:
-    def __init__(self, name, price):
+class Worker:
+    def __init__(self, id, name, department):
+        self.id = id
         self.name = name
-        self.price = price
+        self.department = department
 
-product_1 = Product("T-Shirt", 25)
+worker = Worker(1, 'Bruce Lee', 'Science' )
 
-required_attributes = ["name", "price", "inventory_id"]
+benefits_science_dep = {
+    'salaries_per_year': 14,
+    'hours_per_day': 6,
+    'vacation_per_year': 30
+}
+
+for attr_name, attr_value in benefits_science_dep.items():
+    setattr(worker, attr_name, attr_value)
+
+for attr in dir(worker):
+    value = getattr(worker, attr)
+    print(f'{attr}: {value}')
+
+# But if we just want or need to see an attribute in specific:
+
+worker_attribute = input('Enter the attribute you want to see from the worker: ')
+
+print(getattr(worker, worker_attribute, 'Attribute not found'))
+
+# hasattr() - hasattr(object, attribute_name)
+
+class Book:
+    def __init__(self, name, author, pages):
+        self.name = name
+        self.author = author
+        self.pages = pages
+
+book_1 = Book('The Alchemist', 'Paulo Coelho', 200)
+
+required_attributes = ['name', 'author', 'pages', 'price']
 
 for attr in required_attributes:
-    if not hasattr(product_1, attr):
-        print(f"Error: Product is missing the required attribute: {attr}")
+    if not hasattr(book_1, attr):
+        print(f'Error, book is missing the required attribute: {attr}')
     else:
-        print(f"'{attr}': {getattr(product_1, attr)}")
+        print(f'{attr}: {getattr(book_1, attr)}')
+
+# delattr - delattr(object, attribute_name)
+
+class Movie:
+    def __init__(self, name, category, year, duration):
+        self.name = name
+        self.category = category
+        self.year = year
+        self.duration = duration
+        self.temp_comment = 'It is my favorite movie of all time'
+        self.temp_earnings = 100
+
+movie = Movie('V for Vendetta', 'Comics', 2010, '1 hour and 30 minutes')
+
+attributes_to_clean = ['temp_comment', 'temp_earnings']
+
+for attr in attributes_to_clean:
+    if hasattr(movie, attr):
+        delattr(movie, attr)
+        print(f'Removed attribute: {attr}')
+
+for attr in dir(movie):
+    if not attr.startswith('__') and not callable(getattr(movie, attr)):
+        print(f'{attr}: {getattr(movie,attr)}')
